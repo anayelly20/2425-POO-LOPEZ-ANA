@@ -28,3 +28,4 @@ print("Promedio semanal de temperatura (Tradicional):", average)
 
 # Mostrar temperaturas diarias
 print("Temperaturas diarias registradas (Tradicional):", daily_temperatures)
+
