@@ -1,72 +1,72 @@
-class Moto:
-    def __init__(self, modelo, anio):
-        self.modelo = modelo
-        self.anio = anio
-        self.conductor = None  # Inicialmente, la moto no tiene conductor
+class Producto:
+    def __init__(self, nombre, fecha_caducidad):
+        self.nombre = nombre
+        self.fecha_caducidad = fecha_caducidad
+        self.comprador = None  # Inicialmente, el producto no tiene comprador
 
-    def asignar_conductor(self, persona):
+    def asignar_comprador(self, persona):
         if isinstance(persona, Persona):
-            self.conductor = persona
+            self.comprador = persona
         else:
-            print("Error: Solo se pueden asignar objetos de tipo Persona como conductor.")
+            print("Error: Solo se pueden asignar objetos de tipo Persona como comprador.")
 
     def __str__(self):
-        return f'Moto {self.modelo} del año {self.anio}, conducida por {self.conductor.nombre if self.conductor else "nadie"}.'
+        return f'Producto: {self.nombre}, fecha de caducidad: {self.fecha_caducidad}, comprado por {self.comprador.nombre if self.comprador else "nadie"}.'
 
 
 class Persona:
-    def __init__(self, nombre, licencia):
+    def __init__(self, nombre, identificacion):
         self.nombre = nombre
-        self.licencia = licencia
+        self.identificacion = identificacion
 
     def __str__(self):
-        return f'Persona {self.nombre} con licencia número {self.licencia}.'
+        return f'Persona: {self.nombre}, ID: {self.identificacion}.'
 
 
-class SistemaDeGestion:
+class TiendaDeProductos:
     def __init__(self):
-        self.motos = []
+        self.productos = []
         self.personas = []
 
-    def agregar_moto(self, modelo, anio):
-        nueva_moto = Moto(modelo, anio)
-        self.motos.append(nueva_moto)
-        print(f'Moto {modelo} del año {anio} agregada al sistema.')
+    def agregar_producto(self, nombre, fecha_caducidad):
+        nuevo_producto = Producto(nombre, fecha_caducidad)
+        self.productos.append(nuevo_producto)
+        print(f'Producto {nombre} con fecha de caducidad {fecha_caducidad} agregado a la tienda.')
 
-    def agregar_persona(self, nombre, licencia):
-        nueva_persona = Persona(nombre, licencia)
+    def agregar_persona(self, nombre, identificacion):
+        nueva_persona = Persona(nombre, identificacion)
         self.personas.append(nueva_persona)
-        print(f'Persona {nombre} con licencia número {licencia} agregada al sistema.')
+        print(f'Persona {nombre} con ID {identificacion} agregada al sistema.')
 
-    def asignar_conductor_a_moto(self, moto_indice, persona_indice):
-        if moto_indice < len(self.motos) and persona_indice < len(self.personas):
-            self.motos[moto_indice].asignar_conductor(self.personas[persona_indice])
-            print(f'Conductor {self.personas[persona_indice].nombre} asignado a la moto {self.motos[moto_indice].modelo}.')
+    def asignar_comprador_a_producto(self, producto_indice, persona_indice):
+        if producto_indice < len(self.productos) and persona_indice < len(self.personas):
+            self.productos[producto_indice].asignar_comprador(self.personas[persona_indice])
+            print(f'Comprador {self.personas[persona_indice].nombre} asignado al producto {self.productos[producto_indice].nombre}.')
         else:
-            print("Error: Índice de moto o persona inválido.")
+            print("Error: Índice de producto o persona inválido.")
 
     def mostrar_estado(self):
-        print("\nEstado del sistema:")
-        for moto in self.motos:
-            print(moto)
+        print("\nEstado de la tienda:")
+        for producto in self.productos:
+            print(producto)
         for persona in self.personas:
             print(persona)
 
 
 # Ejemplo de uso
-sistema = SistemaDeGestion()
+tienda = TiendaDeProductos()
 
-# Agregar motos
-sistema.agregar_moto('Sheneray', 2019)
-sistema.agregar_moto('Deportiva', 2024)
+# Agregar productos
+tienda.agregar_producto('Arroz', '2025-12-31')
+tienda.agregar_producto('Aceite', '2024-06-30')
 
 # Agregar personas
-sistema.agregar_persona('Giss', 2)
-sistema.agregar_persona('Dilan', 4)
+tienda.agregar_persona('Ana', 101)
+tienda.agregar_persona('Jorge', 102)
 
-# Asignar conductores
-sistema.asignar_conductor_a_moto(0, 0)  # Laura a la Yamaha
-sistema.asignar_conductor_a_moto(1, 1)  # Carlos a la Ducati
+# Asignar compradores
+tienda.asignar_comprador_a_producto(0, 0)  # Ana compra el arroz
+tienda.asignar_comprador_a_producto(1, 1)  # Jorge compra el aceite
 
 # Mostrar estado
-sistema.mostrar_estado()
+tienda.mostrar_estado()
