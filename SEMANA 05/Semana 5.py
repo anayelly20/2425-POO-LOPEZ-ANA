@@ -1,4 +1,4 @@
-# Ejemplo de Convenciones de Nomenclatura en Python
+#     Tarea Nomenclatura en Python
 
 # Clases: CamelCase (cada palabra comienza con mayúscula)
 class MotoElectrica:
