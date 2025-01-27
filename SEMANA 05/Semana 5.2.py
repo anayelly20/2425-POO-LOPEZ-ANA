@@ -4,6 +4,7 @@
 import math
 
 # Función que calcula el área de un círculo
+
 def calcular_area_circulo(radio):
     # El área de un círculo se calcula con la fórmula A = pi * radio^2
     area = math.pi * radio ** 2
