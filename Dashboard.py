@@ -19,9 +19,9 @@ def mostrar_menu():
 
     opciones = {
         '1': 'SEMANA 02/Semana 2.py',
-        '2': 'SEMANA 03/Semana 3.py',
+        '2': 'SEMANA 03/Semana 3.py,Semana 3 Poo.py',
         '3': 'SEMANA 04/Semana 4.py',
-        '4': 'SEMANA 05/Semana 5.py',
+        '4': 'SEMANA 05/Semana 5.py.Semana 5.2.py',
         '5': 'SEMANA 06/Semana 6.py',
         '6': 'SEMANA 07/Semana 7.py',
 
