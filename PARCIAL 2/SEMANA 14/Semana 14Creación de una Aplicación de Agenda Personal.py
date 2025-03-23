@@ -1,8 +1,12 @@
+# Tarea: Creación de una Aplicación de Agenda Personal
+# Objetivo: Aplicación GUI en Tkinter que permite agregar, ver y eliminar eventos
+
 import tkinter as tk
 from tkinter import ttk, messagebox, Menu, scrolledtext
-from tkcalendar import DateEntry
 
-# Función para agregar un evento
+# ===================== FUNCIONES =====================
+
+# Agrega un nuevo evento a la lista
 def agregar_evento():
     fecha = entry_fecha.get()
     hora = entry_hora.get()
@@ -13,10 +17,11 @@ def agregar_evento():
         return
 
     tree.insert('', 'end', values=(fecha, hora, descripcion))
+    entry_fecha.delete(0, tk.END)
     entry_hora.delete(0, tk.END)
     entry_descripcion.delete(0, tk.END)
 
-# Función para eliminar un evento seleccionado
+# Elimina el evento seleccionado con confirmación
 def eliminar_evento():
     seleccionado = tree.selection()
     if not seleccionado:
@@ -27,20 +32,22 @@ def eliminar_evento():
     if confirmar:
         tree.delete(seleccionado)
 
-# Acción del menú
+# Acción ficticia del menú
 def menu_accion():
     messagebox.showinfo("Menú", "Opción del menú seleccionada")
 
-# Función para salir
+# Salir de la aplicación
 def salir():
     root.quit()
 
-# Crear ventana principal
+# ===================== VENTANA PRINCIPAL =====================
+
 root = tk.Tk()
 root.title("Agenda Personal con Componentes GUI")
 root.geometry("800x600")
 
 # ===================== MENÚ SUPERIOR =====================
+
 barra_menu = Menu(root)
 menu_archivo = Menu(barra_menu, tearoff=0)
 menu_archivo.add_command(label="Abrir", command=menu_accion)
@@ -51,6 +58,7 @@ barra_menu.add_cascade(label="Archivo", menu=menu_archivo)
 root.config(menu=barra_menu)
 
 # ===================== FRAME DE EVENTOS =====================
+
 frame_eventos = tk.LabelFrame(root, text="Eventos Programados", padx=10, pady=10)
 frame_eventos.pack(fill="both", expand=True, padx=10, pady=5)
 
@@ -66,22 +74,27 @@ tree.configure(yscroll=scrollbar.set)
 scrollbar.pack(side="right", fill="y")
 
 # ===================== FRAME DE ENTRADA =====================
+
 frame_entrada = tk.LabelFrame(root, text="Agregar Nuevo Evento", padx=10, pady=10, bg="#eef")
 frame_entrada.pack(fill=tk.X, padx=10, pady=5)
 
-tk.Label(frame_entrada, text="Fecha:", bg="#eef").grid(row=0, column=0, padx=5, pady=5, sticky="e")
-entry_fecha = DateEntry(frame_entrada, width=12, background='darkblue', foreground='white', borderwidth=2, date_pattern='yyyy-mm-dd')
+# Etiqueta y campo de fecha (sustituto de DatePicker)
+tk.Label(frame_entrada, text="Fecha (YYYY-MM-DD):", bg="#eef").grid(row=0, column=0, padx=5, pady=5, sticky="e")
+entry_fecha = tk.Entry(frame_entrada)
 entry_fecha.grid(row=0, column=1, padx=5)
 
+# Etiqueta y campo de hora
 tk.Label(frame_entrada, text="Hora:", bg="#eef").grid(row=0, column=2, padx=5, pady=5, sticky="e")
 entry_hora = tk.Entry(frame_entrada)
 entry_hora.grid(row=0, column=3, padx=5)
 
+# Etiqueta y campo de descripción
 tk.Label(frame_entrada, text="Descripción:", bg="#eef").grid(row=1, column=0, padx=5, pady=5, sticky="e")
 entry_descripcion = tk.Entry(frame_entrada, width=40)
 entry_descripcion.grid(row=1, column=1, columnspan=3, padx=5, pady=5)
 
 # ===================== FRAME DE ACCIONES =====================
+
 frame_acciones = tk.LabelFrame(root, text="Acciones", padx=10, pady=10, bg="#dfd")
 frame_acciones.pack(fill=tk.X, padx=10, pady=5)
 
@@ -94,7 +107,8 @@ btn_eliminar.pack(side=tk.LEFT, padx=10)
 btn_salir = tk.Button(frame_acciones, text="Salir", command=salir)
 btn_salir.pack(side=tk.RIGHT, padx=10)
 
-# ===================== PANEL EXTRA (COMPLEMENTARIO) =====================
+# ===================== PANEL EXTRA (OPCIONAL) =====================
+
 panel_extra = tk.LabelFrame(root, text="Panel de Componentes Extras", bg="#ffe", padx=10, pady=10)
 panel_extra.pack(fill="both", expand=True, padx=10, pady=5)
 
@@ -110,5 +124,5 @@ tk.Label(panel_extra, text="Notas adicionales:", bg="#ffe").pack(anchor="w")
 area_texto = scrolledtext.ScrolledText(panel_extra, height=5)
 area_texto.pack(fill="both", expand=True, padx=5, pady=5)
 
-# ===================== MAIN LOOP =====================
+# ===================== EJECUCIÓN =====================
 root.mainloop()
